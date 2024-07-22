@@ -1,17 +1,39 @@
-import TabbedMessages, {Notification} from "./components/TabbedMessages.jsx";
-import Sidebar from "./components/Sidebar.jsx";
+import React, { useEffect, useState } from 'react';
+
+import Sidebar from './components/Sidebar';
+import TabbedMessages, {Notification} from './components/TabbedMessages';
 
 
-
-
-const notifications = [
-    { type: "New Registration", message: "New user has registered" },
-    { type: "Payment Made", message: "Payment has been made" },
-    { type: "New Incident", message: "New incident reported" },
-    { type: "New Registration", message: "Another user has registered" }
-];
 
 export default function Messages() {
+    const [notifications, setNotifications] = useState([]);
+
+    useEffect(() => {
+        fetchNotifications('sent');
+    }, []);
+
+    const fetchNotifications = (status) => {
+        fetch(`http://localhost:5000/api/notifications/status/${status}`)
+            .then((response) => response.json())
+            .then((data) => setNotifications(data))
+            .catch((error) => console.error('Error fetching notifications:', error));
+    };
+
+    const handleNotificationClick = (id) => {
+        fetch(`http://localhost:5000/api/notifications/${id}`, {
+            method: 'PUT',
+        })
+            .then((response) => response.json())
+            .then(() => {
+                setNotifications(notifications.filter((notification) => notification.id !== id));
+                alert('Notification marked as read');
+            })
+            .catch((error) => {
+                console.error('Error updating notification status:', error);
+                alert('Failed to update notification status');
+            });
+    };
+
     return (
         <div className="flex flex-col w-full gap-2 bg-purple-300 h-[100vh]">
             <div className="">
@@ -23,8 +45,14 @@ export default function Messages() {
                 <div className="bg-white w-2/4 p-3">
                     <div className="font-bold text-2xl">Notifications</div>
                     <div className="flex flex-col gap-2">
-                        {notifications.map((notification, index) => (
-                            <Notification key={index} type={notification.type} message={notification.message} />
+                        {notifications.map((notification) => (
+                            <Notification
+                                key={notification.id}
+                                id={notification.id}
+                                type={notification.type}
+                                message={notification.message}
+                                onClick={handleNotificationClick}
+                            />
                         ))}
                     </div>
                 </div>

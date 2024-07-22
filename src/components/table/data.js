@@ -245,7 +245,7 @@ const accidents = [
     { reporter_id: 14, location: 'Broadway Avenue, City B', severity: 'moderate', photo: 'accident2.jpg', status: 'confirmed' },
     { reporter_id: 15, location: 'Park Road, City C', severity: 'minor', photo: 'accident3.jpg', status: 'resolved' },
     { reporter_id: 12, location: 'Highway 101, City D', severity: 'severe', photo: 'accident4.jpg', status: 'enroute' },
-    { reporter_id: 11, location: 'Oak Street, City E', severity: 'moderate', photo: 'accident5.jpg', status: 'reported' },
+    { reporter_id: 11, location: 'Oak Streetss, City E', severity: 'moderate', photo: 'accident5.jpg', status: 'reported' },
     { reporter_id: 10, location: 'Elm Avenue, City F', severity: 'minor', photo: 'accident6.jpg', status: 'reported' },
     { reporter_id: 9, location: 'Maple Drive, City G', severity: 'severe', photo: 'accident7.jpg', status: 'reported' },
     { reporter_id: 8, location: 'Pine Lane, City H', severity: 'moderate', photo: 'accident8.jpg', status: 'reported' },

@@ -87,15 +87,17 @@ export function Message({ user, message }) {
 }
 
 
+
+
 const notificationTypes = {
-    "New Registration": "text-blue-500",
-    "Payment Made": "text-green-500",
-    "New Incident": "text-red-500"
+    accident: 'text-red-600',
+    route: 'text-blue-600',
+    emergency: 'text-green-600',
 };
 
-export function Notification({ type, message }) {
+export function Notification({ id, type, message, onClick }) {
     return (
-        <div className="bg-purple-200 rounded-xl p-4 items-center flex gap-2">
+        <div className="bg-purple-200 rounded-xl p-4 items-center flex gap-2" onClick={() => onClick(id)}>
             <ImCancelCircle className="text-xl cursor-pointer" />
             <div className={`font-bold text-lg ${notificationTypes[type]}`}>
                 {message}
